@@ -12,7 +12,7 @@ NICKNAME = ('小仓唯', 'xcw', '镜华酱', '镜华')           # 机器人的�
 
 
 # hoshino监听的端口与ip
-PORT = 8080
+PORT = 8888
 HOST = '127.0.0.1'      # Windows部署使用此条配置
 # HOST = '172.17.0.1'   # linux + docker使用此条配置
 # docker桥的ip可能随环境不同而有变化
