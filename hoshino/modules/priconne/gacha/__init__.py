@@ -155,9 +155,9 @@ async def gacha_10(session:CommandSession):
 @sv.on_command('gacha_300', deny_tip=GACHA_DISABLE_NOTICE, aliases=gacha_300_aliases, only_to_me=True)
 async def gacha_300(session:CommandSession):
 
-    await check_tenjo_num(session)
-    uid = session.ctx['user_id']
-    tenjo_limit.increase(uid)
+    # await check_tenjo_num(session)
+    # uid = session.ctx['user_id']
+    # tenjo_limit.increase(uid)
 
     gid = str(session.ctx['group_id'])
     gacha = Gacha(_group_pool[gid])
@@ -214,7 +214,8 @@ async def gacha_300(session:CommandSession):
     msg.append(SWITCH_POOL_TIP)
 
     await session.send('\n'.join(msg), at_sender=True)
-    silence_time = (100*up + 50*(up+s3) + 10*s2 + s1) * 1
+    silence_time = s3 + 10*up
+    # silence_time = (100*up + 50*(up+s3) + 10*s2 + s1) * 1
     await silence(session.ctx, silence_time)
 
 

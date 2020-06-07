@@ -42,10 +42,3 @@ async def dice(bot, ctx, match):
     if s := match.group('offset'):
         offset = int(s)
     await do_dice(bot, ctx, num, min_, max_, opr, offset)
-
-
-@sv.on_command('.qj', only_to_me=False)
-async def kc_marriage(session):
-    args = session.current_arg_text.split()
-    tip = f'与{args[0]}的ケッコンカッコカリ结果是：' if args else '的ケッコンカッコカリ结果是：'
-    await do_dice(session.bot, session.ctx, 1, 3, 6, 1, 0, tip)

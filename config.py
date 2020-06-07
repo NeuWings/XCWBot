@@ -5,10 +5,10 @@ from nonebot.default_config import *
 
 DEBUG = False
 
-SUPERUSERS = [10000]    # 填写超级用户的QQ号，可填多个用半角逗号","隔开
+SUPERUSERS = [501381240]    # 填写超级用户的QQ号，可填多个用半角逗号","隔开
 COMMAND_START = {''}    # 命令前缀（空字符串匹配任何消息）
-COMMAND_SEP = set()     # 命令分隔符（hoshino不需要该特性，保持为set()即可）
-NICKNAME = ''           # 机器人的昵称。呼叫昵称等同于@bot，可用元组配置多个昵称
+COMMAND_SEP = set()     # 命令分隔符（不需要该特性，保持为set()即可）
+NICKNAME = ('小仓唯', 'xcw', '镜华酱', '镜华')           # 机器人的昵称。呼叫昵称等同于@bot，可用元组配置多个昵称
 
 
 # hoshino监听的端口与ip
@@ -20,7 +20,7 @@ HOST = '127.0.0.1'      # Windows部署使用此条配置
 # HOST = '172.18.0.1'   # 阿里云的linux + docker多数情况是这样
 # HOST = '0.0.0.0'      # 开放公网访问使用此条配置（不安全）
 
-IS_CQPRO = False        # 是否使用Pro版酷Q功能
+IS_CQPRO = True        # 是否使用Pro版酷Q功能
 
 # 资源库文件夹  Nonebot访问本机资源
 RESOURCE_DIR = './res/'
@@ -35,15 +35,19 @@ RESOURCE_URL = ''
 # 如欲启用新模块，请认真阅读部署说明，逐个启用逐个配置
 # 切忌一次性开启多个
 MODULES_ON = {
+    # 机器人管理
     'botmanage',
+    # 掷骰子
     'dice',
+    # 群管理
     'groupmaster',
-    # 'hourcall',
-    # 'kancolle',
-    # 'mikan',
+    # 工会战
     'pcrclanbattle',
+    # pcr基础功能
     'priconne',
-    # 'setu',
+    # 涩图
+    'setu',
+    # 翻译
     'translate',
     # 'twitter',
 }

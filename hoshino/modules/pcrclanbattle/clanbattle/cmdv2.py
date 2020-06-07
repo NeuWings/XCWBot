@@ -703,12 +703,17 @@ async def _do_show_remain(bot:NoneBot, ctx:Context_T, args:ParseResult, at_user:
     rlist = bm.list_challenge_remain(1, datetime.now())
     rlist.sort(key=lambda x: x[3] + x[4], reverse=True)
     msg = [ f"\n{clan['name']}今日余刀：" ]
+    total_n = 0;
+    total_e = 0;
     for uid, _, name, r_n, r_e in rlist:
         if r_n or r_e:
             msg.append(f"剩{r_n}刀 补时{r_e}刀 | {ms.at(uid) if at_user else name}")
+            total_n += r_n
+            total_e += r_e
     if len(msg) == 1:
         await bot.send(ctx, f"今日{clan['name']}所有成员均已下班！各位辛苦了！", at_sender=True)
     else:
+        msg.append(f"总共剩余{total_n}刀 补时{total_e}刀")
         msg.append('若有负数说明报刀有误 请注意核对\n使用“!出刀记录 @qq”可查看详细记录')
         if at_user:
             msg.append("=========\n在？阿sir喊你出刀啦！")
