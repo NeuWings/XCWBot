@@ -66,6 +66,11 @@ async def nihaole(session):
 async def penshui(session):
     await session.send(R.img('喷水.jpg').cqcode)
 
+
+@sv.on_command('比划比划', aliases=('来比划比划'))
+async def bihua(session):
+    await session.send(R.img('比划比划.gif').cqcode)
+
 # ============================================ #
 
 
