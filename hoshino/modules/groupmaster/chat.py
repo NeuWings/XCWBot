@@ -62,7 +62,7 @@ async def nihaole(session):
     await util.silence(session.ctx, 30)
 
 
-@sv.on_command('喷水', aliases=('太虚苍蓝闪', '宇宙蓝色闪光'))
+@sv.on_command('喷水', aliases=('太虚苍蓝闪', '太虚苍蓝闪！', '宇宙蓝色闪光'))
 async def penshui(session):
     await session.send(R.img('喷水.jpg').cqcode)
 
