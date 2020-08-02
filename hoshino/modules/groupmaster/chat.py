@@ -80,7 +80,7 @@ async def chat_queshi(bot, ctx):
         await bot.send(ctx, R.img('确实.jpg').cqcode)
 
 
-@sv.on_keyword(('出刀'))
+@sv.on_keyword(('催刀'))
 async def chat_clanba(bot, ctx):
     await bot.send(ctx, R.img('我的天啊你看看都几点了.jpg').cqcode)
 

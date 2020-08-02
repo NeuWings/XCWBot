@@ -10,6 +10,7 @@ PCR会战管理命令 v2
 """
 
 import os
+import requests
 from datetime import datetime, timedelta
 from typing import List
 from matplotlib import pyplot as plt
@@ -751,3 +752,26 @@ async def list_challenge(bot:NoneBot, ctx:Context_T, args:ParseResult):
         c['flag_str'] = '|补时' if flag & bm.EXT else '|尾刀' if flag & bm.LAST else '|掉线' if flag & bm.TIMEOUT else '|通常'
         msg.append(challenstr.format_map(c))
     await bot.send(ctx, '\n'.join(msg))
+
+@cb_cmd('公会排名', ArgParser(usage='!公会排名'))
+async def clan_rank(bot:NoneBot, ctx:Context_T, args:ParseResult):
+    bm = BattleMaster(ctx['group_id'])
+    clan = _check_clan(bm)
+    base = 'https://service-kjcbcnmw-1254119946.gz.apigw.tencentcs.com/name/0'
+    # header用于绕过api验证
+    headers = {
+        'Referer': 'https://kengxxiao.github.io/Kyouka/',
+        'Custom-Source': 'KyoukaOfficial'
+    }
+    resp = requests.post(base, json={ 'clanName': clan['name'], 'history': 0 }, headers = headers)
+    if 200 != resp.status_code:
+        await bot.send(ctx, "查询失败，请联系机器人管理员",  at_sender=True)
+        print(resp)
+        return
+    try:
+        rank = resp.json()['data'][0]['rank']
+        await bot.send(ctx, f"{clan['name']} 当前排名：{rank}", at_sender=True)
+    except Exception as e:
+        await bot.send(ctx, "查询失败，请联系机器人管理员",  at_sender=True)
+        print(resp)
+        return
