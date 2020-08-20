@@ -31,9 +31,11 @@ def get_setu():
     return setu_gener.__next__()
 
 
-@sv.on_rex(re.compile(r'不够[涩瑟色]|[涩瑟色]图|来一?[点份张].*[涩瑟色]|再来[点份张]|看过了|炼?铜'), normalize=True)
+@sv.on_rex(re.compile(r'不够[涩色]|[涩瑟色]图|来[点份张][涩瑟色]|再来[点份张]|看过了|炼铜'), normalize=True)
+# @sv.on_rex(re.compile(r'炼铜'), normalize=True)
 async def setu(bot:NoneBot, ctx, match):
     """随机叫一份涩图，对每个用户有冷却时间"""
+    # await bot.send(ctx, '没水了，发不出涩图勒...')
     # uid = ctx['user_id']
     # if not _nlmt.check(uid):
     #     await bot.send(ctx, EXCEED_NOTICE, at_sender=True)

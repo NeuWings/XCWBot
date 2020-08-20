@@ -88,3 +88,13 @@ async def chat_clanba(bot, ctx):
 @sv.on_keyword(('内鬼'))
 async def chat_neigui(bot, ctx):
     await bot.send(ctx, R.img('内鬼.png').cqcode)
+
+
+@sv.on_keyword(('逮嘎猴', '逮噶猴'))
+async def chat_dagahou(bot, ctx):
+    await bot.send(ctx, '没有')
+
+
+@sv.on_keyword(('普罗丢撒在吗'))
+async def chat_zaima(bot, ctx):
+    await bot.send(ctx, '不在')
