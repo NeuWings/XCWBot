@@ -18,7 +18,7 @@ async def say_sorry(bot, ev):
     await bot.send(ev, 'ごめんなさい！嘤嘤嘤(〒︿〒)')
 
 
-@sv.on_fullmatch(('老婆', 'waifu', 'laopo'), only_to_me=True)
+@sv.on_fullmatch(('老婆', 'waifu', 'laopo', 'mua'), only_to_me=True)
 async def chat_waifu(bot, ev):
     if not priv.check_priv(ev, priv.SUPERUSER):
         await bot.send(ev, R.img('laopo.jpg').cqcode)
@@ -28,17 +28,12 @@ async def chat_waifu(bot, ev):
 
 @sv.on_fullmatch('老公', only_to_me=True)
 async def chat_laogong(bot, ev):
-    await bot.send(ev, '你给我滚！', at_sender=True)
+    await bot.send(ev, '你给我滚！', at_sender=True)1
 
 
-@sv.on_fullmatch('mua', only_to_me=True)
-async def chat_mua(bot, ev):
-    await bot.send(ev, '笨蛋~', at_sender=True)
-
-
-@sv.on_fullmatch('来点星奏')
-async def seina(bot, ev):
-    await bot.send(ev, R.img('星奏.png').cqcode)
+# @sv.on_fullmatch('来点星奏')
+# async def seina(bot, ev):
+#     await bot.send(ev, R.img('星奏.png').cqcode)
 
 
 @sv.on_fullmatch(('我有个朋友说他好了', '我朋友说他好了', ))
@@ -81,5 +76,5 @@ nyb_player = f'''{R.img('newyearburst.gif').cqcode}
 
 @sv.on_keyword(('春黑', '新黑'))
 async def new_year_burst(bot, ev):
-    if random.random() < 0.02:
-        await bot.send(ev, nyb_player)
+    # if random.random() < 0.02:
+    await bot.send(ev, nyb_player)

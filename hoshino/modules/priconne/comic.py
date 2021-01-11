@@ -96,37 +96,37 @@ async def download_comic(id_):
         json.dump(index, f, ensure_ascii=False)
 
 
-@sv.scheduled_job('cron', minute='*/5', second='25')
-async def update_seeker():
-    '''
-    轮询官方四格漫画更新
-    若有更新则推送至订阅群
-    '''
-    index_api = 'https://comic.priconne-redive.jp/api/index'
-    index = load_index()
+# @sv.scheduled_job('cron', minute='*/5', second='25')
+# async def update_seeker():
+#     '''
+#     轮询官方四格漫画更新
+#     若有更新则推送至订阅群
+#     '''
+#     index_api = 'https://comic.priconne-redive.jp/api/index'
+#     index = load_index()
 
-    # 获取最新漫画信息
-    resp = await aiorequests.get(index_api, timeout=10)
-    data = await resp.json()
-    id_ = data['latest_cartoon']['id']
-    episode = data['latest_cartoon']['episode_num']
-    title = data['latest_cartoon']['title']
+#     # 获取最新漫画信息
+#     resp = await aiorequests.get(index_api, timeout=10)
+#     data = await resp.json()
+#     id_ = data['latest_cartoon']['id']
+#     episode = data['latest_cartoon']['episode_num']
+#     title = data['latest_cartoon']['title']
 
-    # 检查是否已在目录中
-    # 同一episode可能会被更新为另一张图片（官方修正），此时episode不变而id改变
-    # 所以需要两步判断
-    if episode in index:
-        qs = urlparse(index[episode]['link']).query
-        old_id = parse_qs(qs)['id'][0]
-        if id_ == old_id:
-            sv.logger.info('未检测到官漫更新')
-            return
+#     # 检查是否已在目录中
+#     # 同一episode可能会被更新为另一张图片（官方修正），此时episode不变而id改变
+#     # 所以需要两步判断
+#     if episode in index:
+#         qs = urlparse(index[episode]['link']).query
+#         old_id = parse_qs(qs)['id'][0]
+#         if id_ == old_id:
+#             sv.logger.info('未检测到官漫更新')
+#             return
 
-    # 确定已有更新，下载图片
-    sv.logger.info(f'发现更新 id={id_}')
-    await download_comic(id_)
+#     # 确定已有更新，下载图片
+#     sv.logger.info(f'发现更新 id={id_}')
+#     await download_comic(id_)
 
-    # 推送至各个订阅群
-    pic = R.img('priconne/comic', get_pic_name(episode)).cqcode
-    msg = f'プリンセスコネクト！Re:Dive公式4コマ更新！\n第{episode}話 {title}\n{pic}'
-    await sv.broadcast(msg, 'PCR官方四格', 0.5)
+#     # 推送至各个订阅群
+#     pic = R.img('priconne/comic', get_pic_name(episode)).cqcode
+#     msg = f'プリンセスコネクト！Re:Dive公式4コマ更新！\n第{episode}話 {title}\n{pic}'
+#     await sv.broadcast(msg, 'PCR官方四格', 0.5)
